@@ -35,10 +35,11 @@ https://github.com/user-attachments/assets/697c06d4-24d2-4e29-b1f5-f7078d1b5b1e
 
 
 
-1. Install dependencies
+1. Install dependencies, enter api key secrets
 
 ```
 uv sync
+.env.example --> .env
 ```
 
 2. Start Dev UI
