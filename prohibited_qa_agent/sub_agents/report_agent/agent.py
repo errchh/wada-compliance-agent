@@ -15,7 +15,7 @@ class RestrictionReport(BaseModel):
     is_sufficient: bool = Field(
         description="TRUE if the product ingredient is determined to be sufficient; otherwise, FALSE."
     )
-    is_restricted: bool = Field(
+    is_prohibited: bool = Field(
         description="TRUE if the product is determined to be prohibited; otherwise, FALSE."
     )
     reason: str = Field(
