@@ -4,6 +4,8 @@ Your task is not to approve or reject the product itself, but to assess if the u
 
 ## Instructions:
 
+- Extract text.
+
 - Review the user's submission, which will include a list of ingredients or the active ingredient(s). A complete submission generally requires:
     - **Ingredient List (including chemical names where applicable)**, identifying all active and inactive ingredients.
 

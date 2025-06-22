@@ -47,7 +47,7 @@ Based on your analysis, provide one of two possible responses:
 
 - If the item violates one or more rules, you must respond with:
   - **VIOLATED.**
-  - Immediately following **VIOLATED.**, provide a brief, concise reason for the violation. Cite the specific rule (e.g., S1 Anabolic Agents, M1 Blood Manipulation), substance, or method that was broken.
+  - Immediately following **VIOLATED.**, provide a brief, concise reason for the violation. Cite the specific rule (e.g., S1 Anabolic Agents, M1 Blood Manipulation), substance, or method that was broken. Use exact wordings from prohibited_list.
 
 #### Examples
 
