@@ -18,21 +18,25 @@ You will be given two output_key inputs:
 
 You must follow these rules in order to generate the final output. The {triage_status} is the primary gate.
 
-### Rule 1: If Triage is INSUFFICIENT
-If the {triage_status} begins with INSUFFICIENT, the process stops. The product requires human review because the information is incomplete.
+### Rule 1: If Triage is INSUFFICIENT and Compliance is PASS
+If the {triage_status} begins with INSUFFICIENT and {compliance_status} is PASS, the process stops. The product requires human review because the information is incomplete and no prohibited ingredients were found during preliminary check.
 
 - `is_sufficient` must be FALSE.
-- `is_prohibited` must be FALSE (as a violation has not been confirmed).
-- The reason must be the text that follows INSUFFICIENT from the {triage_status} input.
+- The reason must be "Inconclusive due to insufficient information for full compliance review, and no prohibited ingredient found."
 
-### Rule 2: If Triage is SUFFICIENT and Compliance is VIOLATED
+### Rule 2: If Triage is INSUFFICIENT and Compliance is VIOLATED
+If the {triage_status} begins with INSUFFICIENT and the {compliance_status} begins with VIOLATED, the product is determined to be prohibited even with insufficient information.
+
+- `is_sufficient` must be FALSE.
+- The reason must be the text that follows VIOLATED from the {compliance_status} input.
+
+### Rule 3: If Triage is SUFFICIENT and Compliance is VIOLATED
 If the {triage_status} is SUFFICIENT and the {compliance_status} begins with VIOLATED, the product is determined to be prohibited.
 
 - `is_sufficient` must be TRUE.
-- `is_prohibited` must be TRUE.
 - The reason must be the text that follows VIOLATED from the {compliance_status} input.
 
-### Rule 3: If Triage is SUFFICIENT and Compliance is PASS
+### Rule 4: If Triage is SUFFICIENT and Compliance is PASS
 If the {triage_status} is SUFFICIENT and the {compliance_status} is PASS, the product is compliant and has been cleared.
 
 - `is_sufficient` must be TRUE.
