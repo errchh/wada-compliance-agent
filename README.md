@@ -49,7 +49,7 @@ https://github.com/user-attachments/assets/697c06d4-24d2-4e29-b1f5-f7078d1b5b1e
 
 4.  **AI Agent Responses**:
 
-    *   **State Examples**:
+    *   **State examples**:
 
         ```
         INSUFFICIENT. The individual concentrations for β-Phenylethylamine, Caffeine, and Theobromine within the "Acuity Blend" are not specified; only the total for the blend is provided. Furthermore, the serving size and recommended daily dosage are absent, both of which are necessary to ascertain the total daily intake of the ingredients.
