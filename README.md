@@ -4,25 +4,25 @@
 
 ## Summary
 
-An AI agent that ensures pro athletes' sport supplements are World Anti-Doping Agency (WADA) compliant, preventing accidental doping from off-the-shelf sport supplement products.
+An AI agent designed to ensure that professional athletes' sports supplements comply with the World Anti-Doping Agency (WADA) regulations, thereby preventing inadvertent doping from commercially available sports supplement products.
 
-This is my entry for the **Google Agent Development Kit Hackathon** with Google Cloud 2025 under **Automation of Complex Process** catagory.
+This submission is for the **Google Agent Development Kit Hackathon** with Google Cloud 2025, under the **Automation of Complex Processes** category.
 
 ## About
 
-Professional athletes are solely responsible for prohibited substances inside their systems. While the World Anti-Doping Agency (WADA) provides a comprehensive list, its complex chemical nomenclature makes manual supplement compliance checks unwieldy and error-prone.
+Professional athletes bear sole responsibility for any prohibited substances detected within their systems. While the World Anti-Doping Agency (WADA) maintains a comprehensive list, its intricate chemical nomenclature presents challenges, rendering manual compliance checks for supplements cumbersome and susceptible to errors.
 
-This AI agent automates the verification process for off-the-shelf sport supplement products, ensuring accurate and efficient adherence to anti-doping regulations.
+This AI agent automates the verification process for off-the-shelf sports supplement products, facilitating accurate and efficient adherence to anti-doping regulations.
 
-## AI Agent
+## AI Agent Architecture
 
-This AI agent was developed using the Google Agent Development Kit (ADK), employing a multi-agent architecture. The system uses a sequential agent workflow to control the flow of states, comprising specialised components:
+This AI agent has been developed utilising the Google Agent Development Kit (ADK), incorporating a multi-agent architecture. The system employs a sequential agent workflow to manage state transitions, comprising specialised components:
 
 ![flowchart](demo/flowchart.png)
 
-* **Triage Agent**: Responsible for initial processing and validation of user input, ensuring data quality before further analysis.
-* **Compliance Agent**: The system's core, this agent meticulously validates supplement substances against the WADA Prohibited List to identify potential violations.
-* **Report Agent**: Generates a structured output in JSON format for integration with downstream systems or analytical tools. **Pydantic** was used to enforce strict data schemas, ensuring the accuracy and integrity of all structured outputs.
+*   **Triage Agent**: Responsible for the initial processing and validation of user input, ensuring data quality prior to further analysis.
+*   **Compliance Agent**: The core component of the system, this agent meticulously validates supplement substances against the WADA Prohibited List to identify any potential violations.
+*   **Report Agent**: Responsible for generating a structured output in JSON format, suitable for integration with downstream systems or analytical tools. **Pydantic** has been employed to enforce strict data schemas, thereby ensuring the accuracy and integrity of all structured outputs.
 
 This modular, agent-based design ensures scalability, maintainability, and precise control over each stage of the compliance-checking process.
 
@@ -30,46 +30,40 @@ This modular, agent-based design ensures scalability, maintainability, and preci
 
 ![devui](demo/devUI_demo.png)
 
-
 https://github.com/user-attachments/assets/697c06d4-24d2-4e29-b1f5-f7078d1b5b1e
 
+1.  **Install Dependencies and Configure API Keys**:
+    ```bash
+    uv sync
+    cp .env.example .env
+    ```
+    *(Ensure your API key secrets are entered into the `.env` file.)*
 
+2.  **Launch the Development User Interface**:
+    ```bash
+    adk web
+    ```
 
-1. Install dependencies, enter api key secrets
+3.  **Initiate a Query**:
+    Input the ingredients of the supplement in the prompt.
 
-```
-uv sync
-.env.example --> .env
-```
+4.  **AI Agent Responses**:
 
-2. Start Dev UI
+    *   **State Examples**:
 
-```
-adk web
-```
+        ```
+        INSUFFICIENT. The individual concentrations for β-Phenylethylamine, Caffeine, and Theobromine within the "Acuity Blend" are not specified; only the total for the blend is provided. Furthermore, the serving size and recommended daily dosage are absent, both of which are necessary to ascertain the total daily intake of the ingredients.
 
-3. Start query
+        VIOLATED. Contains **β-Phenylethylamine (β-PEA)**, a prohibited non-Specified Stimulant (S6.a).
+        ```
 
-```
-User input ingredients in the prompt
-```
+    *   **JSON Structured Output Example**:
+        The AI agent provides a response that includes a JSON object detailing the result and the reasoning:
 
-4. AI agent responses
-
-States example:
-
-```
-INSUFFICIENT. The individual concentrations for β-Phenylethylamine, Caffeine, and Theobromine within the "Acuity Blend" are not specified, only the total for the blend is provided. Additionally, the serving size and recommended daily dosage are missing, which are necessary to determine the total daily intake of the ingredients.
-
-VIOLATED. Contains **β-Phenylethylamine (β-PEA)**, a prohibited non-Specified Stimulant (S6.a).
-```
-
-AI agent response with a JSON structured output of result and reason. Example:
-
-```
-{
-  "is_sufficient": false,
-  "is_prohibited": true,
-  "reason": "Contains β-Phenylethylamine (β-PEA), a prohibited non-Specified Stimulant (S6.a)."
-}
-```
+        ```json
+        {
+          "is_sufficient": false,
+          "is_prohibited": true,
+          "reason": "Contains β-Phenylethylamine (β-PEA), a prohibited non-Specified Stimulant (S6.a)."
+        }
+        ```
